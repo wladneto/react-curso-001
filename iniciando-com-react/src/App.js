@@ -1,20 +1,14 @@
 import React from 'react';
 
 
-class App extends React.Component{
-  
-  state = {
-    nome : 'Digite seu nome'
+function App (props) {
+
+  const modificarNome = event => {
+    console.log(event.target.value)
+
   }
 
-  modificarNome = (event) => {
-    let newNome = event.target.value;
-    this.setState({
-      nome: newNome
-    })
-  }
-
-  criaComboBox = () => {
+  const criaComboBox = () => {
     const opcoes = ["Fulano", "Cicrano", "Beltrano"]
     const comboBoxOpcoes = opcoes.map(opcao => <option>{opcao}</option>) //percorre as opções e retorna uma option p/ cada
     
@@ -25,26 +19,23 @@ class App extends React.Component{
     )
   }
 
-  componentDidMount(){
-    console.log('Executou o componente DidMount')
-  }
+  
 
-  render(){
-    console.log('Executou o componente Render')
-    const MeuComboBox = () => this.criaComboBox()
+
+    const MeuComboBox = () => criaComboBox()
 
     return(
       <React.Fragment>
-        <input type="text" value={this.state.nome} onChange={this.modificarNome} /> 
+        <input type="text" value={props.nome} onChange={modificarNome} /> 
 
-        <h1> Hello {this.state.nome}</h1>
-        <h2>{this.props.nome} - {this.props.versao}</h2>
+        <h1> Hello {props.nome}</h1>
+        <h2>{props.nome} - {props.versao}</h2>
         <MeuComboBox />
 
       </React.Fragment>
     )
   }
-}
+
 
 
 export default App;
