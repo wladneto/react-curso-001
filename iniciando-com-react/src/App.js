@@ -32,7 +32,8 @@ class App extends React.Component{
       <React.Fragment>
         <input type="text" value={this.state.nome} onChange={this.modificarNome} /> 
 
-        <h1> Hello {this.state.nome} Class </h1>
+        <h1> Hello {this.state.nome}</h1>
+        <h2>{this.props.nome} - {this.props.versao}</h2>
         <MeuComboBox />
 
       </React.Fragment>
