@@ -1,17 +1,15 @@
 import React from 'react';
 
-function ComponenteFuncional() {
-  return (
-    <h1>
-     Hello Wlad
-    </h1>
-  );
-}
 
 class App extends React.Component{
+  
+  state = {
+    nome : 'Wlad Neto'
+  }
+
   render(){
     return(
-    <h1> Hello Wlad Class </h1>
+    <h1> Hello {this.state.nome} Class </h1>
     )
   }
 }
