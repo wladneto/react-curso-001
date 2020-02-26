@@ -26,9 +26,9 @@ function App (props) {
 
     return(
       <React.Fragment>
-        <input type="text" value={props.nome} onChange={modificarNome} /> 
+        <input  type="text" value={props.nome} onChange={modificarNome} /> 
 
-        <h1> Hello {props.nome}</h1>
+        <h1 className="text-centralizado"> Hello {props.nome}</h1>
         <h2>{props.nome} - {props.versao}</h2>
         <MeuComboBox />
 
