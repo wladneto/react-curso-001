@@ -14,12 +14,26 @@ class App extends React.Component{
     })
   }
 
+  criaComboBox = () => {
+    const opcoes = ["Fulano", "Cicrano", "Beltrano"]
+    const comboBoxOpcoes = opcoes.map(opcao => <option>{opcao}</option>) //percorre as opções e retorna uma option p/ cada
+    
+    return(
+      <select>
+        {comboBoxOpcoes}
+      </select>
+    )
+  }
+
   render(){
+    const MeuComboBox = () => this.criaComboBox()
+
     return(
       <React.Fragment>
         <input type="text" value={this.state.nome} onChange={this.modificarNome} /> 
 
         <h1> Hello {this.state.nome} Class </h1>
+        <MeuComboBox />
 
       </React.Fragment>
     )
