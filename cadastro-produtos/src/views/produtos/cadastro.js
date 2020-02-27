@@ -6,7 +6,8 @@ const estadoInicial = {
     sku:'',
     descricao:'',
     preco:0,
-    fornecedor:''
+    fornecedor:'',
+    sucesso: false
 }
 
 
@@ -33,8 +34,8 @@ class CadastroProduto extends React.Component {
             fornecedor: this.state.fornecedor
         }
         this.service.salvar(produto)
-        console.log('Salvo com sucesso!')
         this.limpaCampos()
+        this.setState({sucesso:true})
 
     }
 
@@ -49,6 +50,13 @@ class CadastroProduto extends React.Component {
                     Casdastro de Produto
                 </div>
                 <div className="card-body">
+                {/* Renderização condicional */}
+                { this.state.sucesso && 
+                    <div className="alert alert-dismissible alert-success" >
+                        <button type="button" className="close" data-dismiss="alert">&times;</button>
+                        <strong>Sucesso</strong> Cadastro realizado com sucesso!
+                    </div>
+                }
                     <div className="row">
                         <div className="col-md-6">
                             <div className="form-group">
