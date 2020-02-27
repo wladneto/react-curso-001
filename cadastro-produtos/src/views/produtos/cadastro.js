@@ -7,7 +7,8 @@ const estadoInicial = {
     descricao:'',
     preco:0,
     fornecedor:'',
-    sucesso: false
+    sucesso: false,
+    errors:[]
 }
 
 
@@ -33,9 +34,16 @@ class CadastroProduto extends React.Component {
             preco: this.state.preco,
             fornecedor: this.state.fornecedor
         }
-        this.service.salvar(produto)
-        this.limpaCampos()
-        this.setState({sucesso:true})
+        try {
+            this.service.salvar(produto)
+            this.limpaCampos()
+            this.setState({sucesso:true})
+        } 
+        catch(erro) {
+            const errors = erro.errors
+            this.setState({errors:errors})
+        }
+       
 
     }
 
@@ -56,6 +64,19 @@ class CadastroProduto extends React.Component {
                         <button type="button" className="close" data-dismiss="alert">&times;</button>
                         <strong>Sucesso</strong> Cadastro realizado com sucesso!
                     </div>
+                }
+                {/* Renderização condicional */}
+                { this.state.errors.length > 0 &&  
+                    //Mapeando e renderizando item a item do vetor
+                    this.state.errors.map(msg => {
+                        return(
+                        <div className="alert alert-dismissible alert-danger">
+                            <button type="button" className="close" data-dismiss="alert">&times;</button>
+                            <strong>Erro</strong> {msg}
+                        </div>
+                        )
+                    })
+                    
                 }
                     <div className="row">
                         <div className="col-md-6">
@@ -85,7 +106,7 @@ class CadastroProduto extends React.Component {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="form-group">
-                                <label>Descrição: *</label>
+                                <label>Descrição: </label>
                                 <textarea   className="form-control"
                                             name="descricao"
                                             value={this.state.descricao}
