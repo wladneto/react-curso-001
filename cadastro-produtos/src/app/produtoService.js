@@ -28,6 +28,11 @@ export default class ProdutoService {
             throw new ErroValidacao(errors)
         }
     }
+
+    obterProdutos = () => {
+        const produtos = localStorage.getItem(PRODUTOS)
+        return JSON.parse(produtos)
+    }
     
     salvar = (produto) => {
         this.validar(produto)
