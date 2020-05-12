@@ -9,7 +9,8 @@ const estadoInicial = {
     preco:0,
     fornecedor:'',
     sucesso: false,
-    errors:[]
+    errors:[],
+    atualizando:false
 }
 
 
@@ -59,7 +60,7 @@ class CadastroProduto extends React.Component {
                     .obterProdutos().filter( produto => produto.sku === sku )
             if (resultado.length === 1){
                 const produtoEncontrado = resultado[0]
-                this.setState({...produtoEncontrado})
+                this.setState({...produtoEncontrado, atualizando:true})
             }
 
         }
@@ -69,7 +70,8 @@ class CadastroProduto extends React.Component {
         return(
             <div className="card">    
                 <div className="card-header">
-                    Casdastro de Produto
+                    {this.state.atualizando ? 'Atualização ' : 'Cadastro '}
+                     de Produto
                 </div>
                 <div className="card-body">
                 {/* Renderização condicional */}
@@ -111,6 +113,7 @@ class CadastroProduto extends React.Component {
                                 <input  type="text" 
                                         className="form-control"
                                         name="sku"
+                                        disabled={this.state.atualizando}
                                         value={this.state.sku}
                                         onChange={this.onChange}
                                 />
@@ -158,7 +161,9 @@ class CadastroProduto extends React.Component {
                         <div className="col-md-1">
                             <button className="btn btn-success"
                                     onClick={this.onSubmit}
-                            >Salvar</button>
+                            >
+                                {this.state.atualizando ? 'Atualizar':'Salvar'}
+                                </button>
                         </div>
                         <div className="col-md-1">
                             <button className="btn btn-primary"
