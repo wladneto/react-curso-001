@@ -69,5 +69,18 @@ export default class ProdutoService {
         localStorage.setItem(PRODUTOS, JSON.stringify(produtos))
     }
 
+    deletar = (sku) => {
+       
+        const index = this.obterIndex(sku)
+        console.log("Excluindo ", index)
+        if (index !== null){
+            const produtos = this.obterProdutos()
+            produtos.splice(index, 1)
+            localStorage.setItem(PRODUTOS, JSON.stringify(produtos))
+            return produtos
+        }
+
+    }
+
 
 }
